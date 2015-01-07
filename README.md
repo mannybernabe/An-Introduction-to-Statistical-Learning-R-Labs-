@@ -1,4 +1,4 @@
-Notes on *An Introduction to Statistical Learning R* (ISLR) Labs
+Notes on *An Introduction to Statistical Learning* (ISLR) Labs
 ===============================================
 Authors: Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani.
 
