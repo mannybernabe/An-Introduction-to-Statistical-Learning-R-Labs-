@@ -107,3 +107,66 @@ lm.fit1<-update(lm.fit,~.-age)
 # The syntax lstat*age simultaneously includes lstat, age, 
 # and the interaction term lstat×age as predictors; 
 # it is a shorthand for lstat+age+lstat:age"
+
+summary(lm(medv~lstat*age,data=boston))
+
+
+##
+##Non-linear transformations
+##
+
+lm.fit2<-lm(medv~lstat+I(lstat^2),data=boston)
+summary(lm.fit2)
+#note the significant p-value for the polynomial transformation
+
+#Use anova() function to quantify improvment of adding transformation
+#analsis of variance table
+
+lm.fit<-lm(medv~lstat,data=boston)
+
+anova(lm.fit,lm.fit2)
+#F-square of 135 (high) and corresponding near-zero
+#p-value suggest that new model is superior. 
+
+
+par(mfrow=c(2,2))
+plot(lm.fit2)
+
+
+#use ploy() to create higher level polynomial fits
+
+lm.fit5<-lm(medv~poly(lstat,5),data=boston)
+summary(lm.fit5)
+
+plot(lm.fit5)
+
+
+#log transformation
+summary(lm(medv~log(rm),data=boston))
+
+
+
+##
+##Qualitative Predictors
+##
+
+remove(list=ls())
+
+data(Carseats)
+carseats<-Carseats;remove(Carseats)
+
+names(carseats)
+str(carseats$ShelveLoc)#note that Shelve Loation in location with three factors
+
+
+lm.fit<-lm(Sales~.+Income:Advertising+Price:Age,data=carseats)
+summary(lm.fit)
+
+contrasts(carseats$ShelveLoc)
+#returns coding that lm function uses
+
+
+
+
+
+
